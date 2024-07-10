@@ -6,7 +6,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express();
-const port = 8000;
+const port = 8080;
 
 app.use(express.static(path.join(__dirname, '../uploads'))); // uploads 폴더의 이미지 접근
 app.use(cors()); // 다른 origin 사이 통신 허용
