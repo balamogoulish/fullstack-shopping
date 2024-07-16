@@ -6,10 +6,17 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express();
-const port = 8080;
+const port = 8000;
 
-app.use(express.static(path.join(__dirname, '../uploads'))); // uploads 폴더의 이미지 접근
-app.use(cors()); // 다른 origin 사이 통신 허용
+const corsOptions = {
+    origin: '*', // Adjust this to the specific origins you want to allow
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
+};
+app.use(express.static(path.join(__dirname, '/uploads'))); // uploads 폴더의 이미지 접근
+app.use(cors(corsOptions)); // 다른 origin 사이 통신 허용
+
+console.log('Static files are served from:', path.join(__dirname, '/uploads'));
 app.use(express.json()); //post할 때 프로토콜 지정
 app.use((error, req, res, next)=>{
     res.status(err.status || 500)
